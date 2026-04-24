@@ -5,7 +5,85 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/* 🎨 THEME CONFIG */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+
+    /* Primary brand color */
+    --color-primary: #6366f1; /* indigo-500 */
+    --color-primary-dark: #4f46e5;
+
+    /* Backgrounds */
+    --color-bg: #0f172a; /* slate-900 */
+    --color-surface: #1e293b; /* slate-800 */
+
+    /* Text */
+    --color-text: #f1f5f9; /* slate-100 */
+    --color-muted: #94a3b8; /* slate-400 */
+
+    /* Accent */
+    --color-accent: #22c55e; /* green-500 */
 }
+
+/* 🌍 GLOBAL STYLES */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* 🧱 LAYOUT HELPERS */
+.container {
+    @apply max-w-7xl mx-auto px-4;
+}
+
+/* 🧩 COMPONENTS */
+
+/* Card */
+.card {
+    @apply bg-[var(--color-surface)] rounded-xl p-5 shadow-lg border border-slate-700;
+}
+
+/* Button */
+.btn {
+    @apply px-4 py-2 rounded-lg font-medium transition;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Input */
+.input {
+    @apply w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}
+
+/* Navbar */
+.nav-link {
+    @apply text-slate-300 hover:text-white transition;
+}
+
+/* Title */
+.title {
+    @apply text-2xl font-semibold mb-4;
+}
+
+.input {
+    @apply bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2 text-sm
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+           placeholder-slate-500 transition;
+}
+ 
+.btn {
+    @apply inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition;
+}
+ 
+.btn-primary {
+    @apply bg-indigo-600 hover:bg-indigo-500 text-white;
+}
+ 

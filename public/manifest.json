@@ -1,0 +1,15 @@
+{
+    "name": "Cliniqly Dental SaaS",
+    "short_name": "Cliniqly",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#f53003",
+    "icons": [
+        {
+            "src": "https://laravel.com/img/logomark.min.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml"
+        }
+    ]
+}

@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('goals', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             // --- Core ---
             $table->string('title');

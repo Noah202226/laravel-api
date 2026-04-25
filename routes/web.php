@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\SubtaskController;
 use App\Http\Controllers\TaskController;
@@ -18,27 +20,36 @@ Route::get('/api/health-check', function () {
     }
 });
 
-Route::get('/', [GoalController::class, 'index'])->name('goals.index');
 
-// Goals — CRUD
-Route::get('/goals', [GoalController::class, 'goals'])->name('goals.goals');
-Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create');
-Route::post('/goals', [GoalController::class, 'store'])->name('goals.store');
-Route::get('/goals/{id}', [GoalController::class, 'goal'])->name('goals.goal');
-Route::get('/goals/{id}/edit', [GoalController::class, 'edit'])->name('goals.edit');
-Route::put('/goals/{id}', [GoalController::class, 'update'])->name('goals.update');
-Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goals.destroy');
 
-// Steps
-Route::post('/goals/{goal}/steps', [StepController::class, 'store'])->name('steps.store');
-Route::delete('/steps/{step}', [StepController::class, 'destroy'])->name('steps.destroy');
+Route::middleware('auth')->group(function () {
 
-// Tasks
-Route::post('/steps/{step}/tasks', [TaskController::class, 'store'])->name('tasks.store');
-Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
-Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Subtasks
-Route::post('/tasks/{task}/subtasks', [SubtaskController::class, 'store'])->name('subtasks.store');
-Route::patch('/subtasks/{subtask}/toggle', [SubtaskController::class, 'toggle'])->name('subtasks.toggle');
-Route::delete('/subtasks/{subtask}', [SubtaskController::class, 'destroy'])->name('subtasks.destroy');
+    Route::get('/', [GoalController::class, 'index'])->name('goals.index');
+    Route::get('/goals', [GoalController::class, 'goals'])->name('goals.goals');
+    Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create');
+    Route::post('/goals', [GoalController::class, 'store'])->name('goals.store');
+    Route::get('/goals/{id}', [GoalController::class, 'goal'])->name('goals.goal');
+    Route::get('/goals/{id}/edit', [GoalController::class, 'edit'])->name('goals.edit');
+    Route::put('/goals/{id}', [GoalController::class, 'update'])->name('goals.update');
+    Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goals.destroy');
+
+    Route::post('/goals/{goal}/steps', [StepController::class, 'store'])->name('steps.store');
+    Route::delete('/steps/{step}', [StepController::class, 'destroy'])->name('steps.destroy');
+
+    Route::post('/steps/{step}/tasks', [TaskController::class, 'store'])->name('tasks.store');
+    Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
+    Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
+    Route::post('/tasks/{task}/subtasks', [SubtaskController::class, 'store'])->name('subtasks.store');
+    Route::patch('/subtasks/{subtask}/toggle', [SubtaskController::class, 'toggle'])->name('subtasks.toggle');
+    Route::delete('/subtasks/{subtask}', [SubtaskController::class, 'destroy'])->name('subtasks.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+});
+
+require __DIR__ . '/../routes/auth.php';

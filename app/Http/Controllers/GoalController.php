@@ -62,13 +62,7 @@ class GoalController extends Controller
         $validated['is_pinned'] = $request->boolean('is_pinned');
         $validated['status'] = 'not_started';
         $validated['progress'] = 0;
-        $validated['user_id'] = \App\Models\User::firstOrCreate(
-            ['email' => 'demo@example.com'],
-            [
-                'name' => 'Demo User',
-                'password' => bcrypt('password'),
-            ]
-        )->id;
+        $validated['user_id'] = auth()->id() ?? abort(401);
 
         $goal = Goal::create($validated);
 
